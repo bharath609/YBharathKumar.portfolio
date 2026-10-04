@@ -109,10 +109,13 @@ h2{font:700 clamp(38px,6vw,88px)/1 var(--d);letter-spacing:-.04em;margin:16px 0 
 .chip:hover{color:var(--ac);border-color:rgba(var(--rgb),.5)}
 .more{margin-top:auto;font:500 13px var(--m);width:max-content}.more span{color:var(--ac);margin-left:6px}
 .hint{display:flex;justify-content:space-between;font:400 12px var(--m);color:#6f789c;margin-top:18px}
-.skills{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:20px;align-items:start}
-.sg{border-top:1px solid var(--line);padding-top:16px}
+.skills{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:20px}
+.sg{position:relative;overflow:hidden;min-height:190px;padding:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(150deg,rgba(var(--rgb),.09),transparent 60%),var(--panel);display:flex;flex-direction:column;justify-content:flex-end;transition:transform .4s,border-color .4s}
+.sg:hover{border-color:rgba(var(--rgb),.45);transform:translateY(-6px)}
 .sg:nth-child(-n+3){grid-column:span 2}
 .sg:nth-child(n+4){grid-column:span 3}
+.sg .num{position:absolute;top:16px;right:18px;font:400 12px var(--m);color:#6f789c}
+.sg .chips{margin:14px 0 0}
 .sg h3{font:600 20px var(--d);margin-bottom:6px}.sg .chips{margin-top:14px}
 .soft{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 30px;font:400 13px var(--m);color:var(--muted)}
 .soft b{color:var(--ac);font-weight:500}
@@ -160,7 +163,7 @@ footer b{font-family:var(--d);color:var(--text);font-size:15px}
 .stats{grid-template-columns:repeat(2,1fr)}.stats div:nth-child(2){border-right:0}.stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}
 .row .btn{flex:1;justify-content:center}
 .skills{grid-template-columns:repeat(2,1fr)}.sg:nth-child(-n+3),.sg:nth-child(n+4){grid-column:span 1}.sg:last-child{grid-column:span 2}}
-@media(max-width:600px){.skills{grid-template-columns:1fr}.sg:last-child{grid-column:span 1}}
+@media(max-width:600px){.skills{grid-template-columns:1fr}.sg:last-child{grid-column:span 1}.sg{min-height:0}}
 @media(max-width:400px){.pipe{grid-template-columns:repeat(3,minmax(0,1fr))}.pipe div{padding:12px}.pipe b{font-size:13px}.orb{width:58%}.n1,.n3{left:14%}.n2,.n4{left:86%}.node{font-size:max(9.5px,3.1cqw)}}
 @media(max-width:340px){.orb{width:54%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

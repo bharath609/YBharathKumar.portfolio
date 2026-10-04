@@ -226,7 +226,7 @@ function App() {
           <div className="lab">Skills</div>
           <h2>Tools I <em>work with.</em></h2>
           <div className="skills">
-            {skills.map(([g, items]) => <div className="sg" key={g}><h3>{g}</h3><div className="chips"><Chips items={items} /></div></div>)}
+            {skills.map(([g, items], i) => <div className="sg" key={g}><span className="num">0{i + 1}</span><h3>{g}</h3><div className="chips"><Chips items={items} /></div></div>)}
           </div>
           <div className="soft"><b>Soft skills</b>{soft.map((x) => <span key={x}>{x}</span>)}</div>
         </section>
