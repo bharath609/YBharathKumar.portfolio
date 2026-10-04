@@ -8,6 +8,7 @@ const EMAIL = 'ybharathkumar2006@gmail.com';
 const GMAIL = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${encodeURIComponent('Hello Bharath')}`;
 const GITHUB = 'https://github.com/bharath609';
 const LINKEDIN = 'https://www.linkedin.com/in/y-bharath-kumar-5990b4263/';
+const WHATSAPP = `https://wa.me/918519828505?text=${encodeURIComponent('Hello Bharath')}`;
 const PHOTO = photo;
 const RESUME = import.meta.env.VITE_RESUME || `${import.meta.env.BASE_URL}resume.pdf`;
 
@@ -249,6 +250,7 @@ function App() {
               <Ext href={GITHUB}>GitHub ↗</Ext>
               <Ext href={LINKEDIN}>LinkedIn ↗</Ext>
               <Ext href={RESUME}>Resume ↗</Ext>
+              <Ext href={WHATSAPP}>WhatsApp ↗</Ext>
             </div>
           </div>
         </section>
