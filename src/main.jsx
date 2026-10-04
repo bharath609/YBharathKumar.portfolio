@@ -156,6 +156,7 @@ function App() {
             <div className="act">
               <div className="row">
                 <button className="btn solid" onClick={() => go('#work')}>See my projects ↓</button>
+                <button className="btn" onClick={() => nav('#contact')}>Let&apos;s talk ↗</button>
               </div>
               <p className="status"><i />Open to full-time developer roles</p>
             </div>
