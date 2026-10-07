@@ -150,7 +150,7 @@ function App() {
           </figure>
           <div className="hl">
             <p className="tag">Full-stack developer · B.E. Information Science</p>
-            <h1>I build software <em>people can use.</em></h1>
+            <h1>I turn ideas into <em>working software.</em></h1>
           </div>
           <div className="info">
             <p className="lede">Java, Python and React developer who also works with AI: prompt engineering, LLM basics and AI-assisted building. Two IBM internships, in cybersecurity and in AI data quality.</p>
