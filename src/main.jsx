@@ -31,11 +31,6 @@ const projects = [
         'Real-time item selection, dynamic quantity input and total computation.',
         'Full-cycle development with user-centric design principles.'],
     s: ['Python', 'Billing logic', 'Receipts'], f: ['Select item', 'Quantity', 'Subtotal + tax', 'Receipt'] },
-  { t: 'Security · IBM SkillsBuild', h: 'Steganography: Messages in Images',
-    d: 'Built during my cybersecurity internship: a project that hides secure messages inside images.',
-    b: ['Built a steganography project to secure messages within images.',
-        'Part of the IBM SkillsBuild cybersecurity internship, alongside work on threat models, vulnerability assessments and basic encryption.'],
-    s: ['Steganography', 'Encryption basics', 'Threat models'], f: ['Message', 'Embed', 'Image', 'Extract'] },
 ];
 const jobs = [
   { y: '6 weeks', r: 'Cyber Security Intern', c: 'IBM SkillsBuild',
@@ -48,7 +43,7 @@ const education = [
   ['Sri Gayatri Junior College', 'Class 12 · Intermediate · Vijayawada', '2019–2021', 'CGPA 9.62'],
   ['Saraswathi High School', 'Class 10 · Secondary · Uppugundur', '2019', 'CGPA 9.5'],
 ];
-const stats = [['8.24', 'Degree CGPA'], ['2', 'IBM internships'], ['4', 'Certifications'], ['4', 'Projects']];
+const stats = [['8.24', 'Degree CGPA'], ['2', 'IBM internships'], ['4', 'Certifications'], ['3', 'Projects']];
 const skills = [
   ['Languages', ['Java', 'Python']],
   ['Web and frameworks', ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Spring Boot']],
