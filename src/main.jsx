@@ -13,6 +13,12 @@ const PHOTO = photo;
 const RESUME = import.meta.env.VITE_RESUME || `${import.meta.env.BASE_URL}resume.pdf`;
 
 const projects = [
+  { t: 'React · Operations research', h: 'optisolver.ai',
+    d: 'An AI-powered operations research tool that turns plain-English planning problems into mathematically optimal decisions in seconds.',
+    b: ['Built a browser-based solver for production planning, transportation, and game-theory problems using natural-language input.',
+        'Combined AI model selection with the HiGHS optimization solver to return optimal quantities, costs, utilization, and reasoning.',
+        'Designed a no-signup experience for manufacturing, logistics, retail planning, studios, agencies, and founders.'],
+    s: ['React', 'FastAPI', 'HiGHS', 'Operations research'], f: ['Describe', 'Model', 'Optimize', 'Decide'], href: 'https://optiforge-ai.vercel.app/', linkLabel: 'Open live site ↗' },
   { t: 'Java · Desktop app', h: 'Live Score Board Application',
     d: 'A Java scoreboard that manages and shows real-time game scores through an interactive Swing interface.',
     b: ['Developed a Java-based scoreboard application to manage and display real-time game scores.',
@@ -42,7 +48,7 @@ const education = [
   ['Sri Gayatri Junior College', 'Class 12 · Intermediate · Vijayawada', '2019–2021', 'CGPA 9.62'],
   ['Saraswathi High School', 'Class 10 · Secondary · Uppugundur', '2019', 'CGPA 9.5'],
 ];
-const stats = [['8.24', 'Degree CGPA'], ['2', 'IBM internships'], ['4', 'Certifications'], ['3', 'Projects']];
+const stats = [['8.24', 'Degree CGPA'], ['2', 'IBM internships'], ['4', 'Certifications'], ['4', 'Projects']];
 const skills = [
   ['Languages', ['Java', 'Python']],
   ['Web and frameworks', ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Spring Boot']],
@@ -86,7 +92,7 @@ function Modal({ p, onClose }) {
         {p.b.map((x) => <p key={x}>• {x}</p>)}
         <div className="fl"><Flow items={p.f} /></div>
         <div className="chips"><Chips items={p.s} /></div>
-        <Ext href={GITHUB}>More on GitHub ↗</Ext>
+         <Ext href={p.href || GITHUB}>{p.linkLabel || 'More on GitHub ↗'}</Ext>
       </div>
     </div>
   );
@@ -150,7 +156,7 @@ function App() {
           </figure>
           <div className="hl">
             <p className="tag">Full-stack developer · B.E. Information Science</p>
-            <h1>I turn ideas into <em>working software.</em></h1>
+            <h1>Turning ideas into <em>intelligent software.</em></h1>
           </div>
           <div className="info">
             <p className="lede">Java, Python and React developer who also works with AI: prompt engineering, LLM basics and AI-assisted building. Two IBM internships, in cybersecurity and in AI data quality.</p>
