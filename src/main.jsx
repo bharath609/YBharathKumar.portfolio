@@ -57,11 +57,11 @@ const education = [
 ];
 const stats = [['8.24', 'Degree CGPA'], ['2', 'IBM internships'], ['4', 'Certifications'], ['5', 'Projects']];
 const skills = [
-  ['Languages', ['Java', 'Python']],
-  ['Web and frameworks', ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Spring Boot']],
-  ['Cloud and data', ['Azure Cloud', 'VMware', 'MySQL']],
-  ['AI and prompting', ['Prompt engineering', 'LLM basics', 'RAG', 'Model evaluation']],
-  ['Tools and platforms', ['GitHub', 'VS Code', 'Eclipse IDE']],
+  ['Languages and runtimes', ['Java', 'Python', 'JavaScript', 'Node.js']],
+  ['Web and API frameworks', ['HTML5', 'CSS3', 'React.js', 'Vite', 'FastAPI', 'Spring Boot']],
+  ['Cloud, data and retrieval', ['Azure Cloud', 'VMware', 'MySQL', 'ChromaDB', 'Ollama', 'Embeddings', 'Vector retrieval']],
+  ['AI, RAG and agents', ['RAG', 'Prompt engineering', 'LLM basics', 'Citation grounding', 'Claim verification', 'Relevance gating', 'Intent routing', 'Anthropic API']],
+  ['Desktop, voice and tools', ['Electron', 'Web Speech API', 'Wispr Flow', 'Windows automation', 'GitHub', 'VS Code', 'pytest']],
 ];
 const certs = [
   ['Udemy', 'Front End Development (HTML5, CSS3, JavaScript)'],
