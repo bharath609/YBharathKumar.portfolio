@@ -13,6 +13,18 @@ const PHOTO = photo;
 const RESUME = import.meta.env.VITE_RESUME || `${import.meta.env.BASE_URL}resume.pdf`;
 
 const projects = [
+  { t: 'Python · React · RAG', h: 'Lumen RAG Chatbot',
+    d: 'A grounded document-intelligence workspace that lets users upload files, ask questions, and inspect the evidence behind every answer.',
+    b: ['Built a local-first RAG pipeline with multi-format document ingestion, structure-aware chunking, local embeddings, and a persistent ChromaDB vector index.',
+        'Added a relevance gate, grounded citations, retrieval metrics, retrieval receipts, and claim-level self-verification to make answers easier to trust.',
+        'Created a React/Vite evidence workspace with per-document source controls, suggested follow-ups, FastAPI endpoints, and Ollama/Anthropic provider support.'],
+    s: ['Python', 'React', 'FastAPI', 'ChromaDB', 'Ollama', 'RAG'], f: ['Upload', 'Chunk', 'Retrieve', 'Verify'], href: 'https://bharath609.github.io/lumen-rag-chatbot/', linkLabel: 'Open live demo ↗' },
+  { t: 'Node.js · Electron · Voice AI', h: 'BRO Live AI Assistant',
+    d: 'A local-first desktop assistant that turns explicit chat and voice commands into safe, useful actions across projects, websites, and Windows.',
+    b: ['Built a loopback Node.js assistant with deterministic intent routing, named project commands, and an approval boundary before running configured profiles.',
+        'Added browser voice input/output, a Windows Electron overlay, Wispr Flow integration, and a one-shot Ctrl + Alt + B voice workflow.',
+        'Kept actions constrained with allowlisted URLs and desktop targets, registered project roots, bounded command output, and automated Node test coverage.'],
+    s: ['Node.js', 'Electron', 'JavaScript', 'Voice AI', 'Windows automation'], f: ['Listen', 'Understand', 'Approve', 'Act'], linkLabel: 'More on GitHub ↗' },
   { t: 'React · Operations research', h: 'optisolver.ai',
     d: 'An AI-powered operations research tool that turns plain-English planning problems into mathematically optimal decisions in seconds.',
     b: ['Built a browser-based solver for production planning, transportation, and game-theory problems using natural-language input.',
@@ -43,7 +55,7 @@ const education = [
   ['Sri Gayatri Junior College', 'Class 12 · Intermediate · Vijayawada', '2019–2021', 'CGPA 9.62'],
   ['Saraswathi High School', 'Class 10 · Secondary · Uppugundur', '2019', 'CGPA 9.5'],
 ];
-const stats = [['8.24', 'Degree CGPA'], ['2', 'IBM internships'], ['4', 'Certifications'], ['3', 'Projects']];
+const stats = [['8.24', 'Degree CGPA'], ['2', 'IBM internships'], ['4', 'Certifications'], ['5', 'Projects']];
 const skills = [
   ['Languages', ['Java', 'Python']],
   ['Web and frameworks', ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Spring Boot']],
