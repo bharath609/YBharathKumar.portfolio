@@ -18,7 +18,7 @@ const projects = [
     b: ['Built a local-first RAG pipeline with multi-format document ingestion, structure-aware chunking, local embeddings, and a persistent ChromaDB vector index.',
         'Added a relevance gate, grounded citations, retrieval metrics, retrieval receipts, and claim-level self-verification to make answers easier to trust.',
         'Created a React/Vite evidence workspace with per-document source controls, suggested follow-ups, FastAPI endpoints, and Ollama/Anthropic provider support.'],
-    s: ['Python', 'React', 'FastAPI', 'ChromaDB', 'Ollama', 'RAG'], f: ['Upload', 'Chunk', 'Retrieve', 'Verify'], href: 'https://bharath609.github.io/lumen-rag-chatbot/', linkLabel: 'Open live demo ↗' },
+    s: ['Python', 'React', 'FastAPI', 'ChromaDB', 'Ollama', 'RAG'], f: ['Upload', 'Chunk', 'Retrieve', 'Verify'], href: 'https://bharath609.github.io/lumora-rag-chatbot/', linkLabel: 'Open live demo ↗' },
   { t: 'Node.js · Electron · Voice AI', h: 'BRO Live AI Assistant',
     d: 'A local-first desktop assistant that turns explicit chat and voice commands into safe, useful actions across projects, websites, and Windows.',
     b: ['Built a loopback Node.js assistant with deterministic intent routing, named project commands, and an approval boundary before running configured profiles.',
