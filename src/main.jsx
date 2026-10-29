@@ -13,7 +13,7 @@ const PHOTO = photo;
 const RESUME = import.meta.env.VITE_RESUME || `${import.meta.env.BASE_URL}resume.pdf`;
 
 const projects = [
-  { t: 'Python · React · RAG', h: 'Lumen RAG Chatbot',
+  { t: 'Python · React · RAG', h: 'Lumora RAG Chatbot',
     d: 'A grounded document-intelligence workspace that lets users upload files, ask questions, and inspect the evidence behind every answer.',
     b: ['Built a local-first RAG pipeline with multi-format document ingestion, structure-aware chunking, local embeddings, and a persistent ChromaDB vector index.',
         'Added a relevance gate, grounded citations, retrieval metrics, retrieval receipts, and claim-level self-verification to make answers easier to trust.',
