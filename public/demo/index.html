@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Y Bharath Kumar — Full-Stack Developer (Design Prototype)</title>
+  <meta name="description" content="Design prototype for Y Bharath Kumar — full-stack developer working with Java, Python, React and applied AI." />
+  <meta name="theme-color" content="#050505" />
+  <meta name="color-scheme" content="dark" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+
+  <script>
+    /* Decide before first paint whether the swarm intro should play. */
+    (function () {
+      try {
+        var mode = new URLSearchParams(location.search).get('swarm');
+        var seen = sessionStorage.getItem('bh-swarm-seen') === '1';
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (mode !== 'off' && !reduce && (mode === '1' || mode === 'on' || !seen)) {
+          document.documentElement.classList.add('swarm-boot', 'swarm-pause');
+          window.setTimeout(function () {
+            if (!window.__bhSwarmStarted) {
+              document.documentElement.classList.remove('swarm-boot', 'swarm-pause');
+            }
+          }, 8000);
+        }
+      } catch (error) { /* no intro if storage or URL parsing is blocked */ }
+    })();
+  </script>
+  <noscript><style>#swarm-intro { display: none !important; }</style></noscript>
+</head>
+<body>
+
+  <!-- Arrow-agent swarm intro -->
+  <div class="swarm-intro" id="swarm-intro" aria-hidden="true">
+    <div class="swarm-curtain" aria-hidden="true"></div>
+    <div class="swarm-grid" aria-hidden="true"></div>
+    <canvas class="swarm-trails" id="swarm-trails" aria-hidden="true"></canvas>
+    <div class="swarm-cursors" id="swarm-cursors" aria-hidden="true"></div>
+    <div class="swarm-monogram" aria-hidden="true">YB<span>.</span></div>
+    <div class="swarm-status"><i aria-hidden="true"></i> REBUILDING INTERFACE <span>YB / 2026</span></div>
+    <div class="swarm-scanline" aria-hidden="true"></div>
+    <div class="swarm-hud">
+      <span class="swarm-dots" aria-hidden="true">
+        <i style="background:#ef4444"></i>
+        <i style="background:#ffd166"></i>
+        <i style="background:#2ec4b6"></i>
+        <i style="background:#4cc9f0"></i>
+        <i style="background:#f72585"></i>
+      </span>
+      <span class="swarm-agents-label"><b id="swarm-agent-count">18</b> AGENTS</span>
+      <span class="swarm-layer"><b id="swarm-progress-label">000</b> / 100</span>
+      <span class="swarm-bar" aria-hidden="true"><i id="swarm-bar"></i></span>
+      <button class="swarm-skip" id="swarm-skip" type="button">ENTER <span class="arr-right">→</span></button>
+    </div>
+  </div>
+
+  <!-- Ambient crimson canvas -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><i></i></div>
+
+  <!-- Floating dock navigation -->
+  <header class="dock-container">
+    <nav class="nav-dock" id="nav-dock" aria-label="Main navigation">
+      <a href="#hero" class="nav-brand" aria-label="Y Bharath Kumar — home">
+        <span class="brand-monogram">YB</span>
+        <span class="brand-label">BHARATH<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#about" class="nav-item">About <span class="nav-arrow" aria-hidden="true">↗</span></a>
+        <a href="#flagships" class="nav-item">Flagships <span class="nav-arrow" aria-hidden="true">↗</span></a>
+        <a href="#matrix" class="nav-item">Matrix <span class="nav-arrow" aria-hidden="true">↗</span></a>
+        <a href="#stack" class="nav-item">Stack <span class="nav-arrow" aria-hidden="true">↗</span></a>
+        <a href="#contact" class="nav-item">Contact <span class="nav-arrow" aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="dock-right">
+        <div class="dock-status" title="Currently open to full-time software roles">
+          <span class="status-dot"></span>
+          <span class="status-text">Available</span>
+        </div>
+        <a href="#contact" class="dock-cta">DISPATCH <span class="arr-right" aria-hidden="true">→</span></a>
+      </div>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-grid" aria-hidden="true">
+        <div class="grid-line line-1"></div>
+        <div class="grid-line line-2"></div>
+        <div class="grid-line line-3"></div>
+      </div>
+
+      <div class="hero-wordmark" aria-hidden="true">
+        <svg viewBox="0 0 1400 250" preserveAspectRatio="xMidYMid meet" role="presentation">
+          <text x="700" y="205" text-anchor="middle" textLength="1360" lengthAdjust="spacingAndGlyphs" vector-effect="non-scaling-stroke">BHARATH</text>
+        </svg>
+      </div>
+
+      <div class="hero-stage">
+        <!-- Left: identity -->
+        <div class="hero-flank left-flank">
+          <p class="hero-script">Hello, I'm</p>
+          <h1 class="hero-name">BHARATH<span class="accent-dot">.</span></h1>
+
+          <div class="hero-role-pill">
+            <span class="pill-dot" aria-hidden="true">●</span>
+            FULL-STACK DEVELOPER
+          </div>
+
+          <p class="hero-desc">
+            I build <strong>grounded AI products</strong>, fast interfaces and dependable
+            backends — then verify the details until the whole thing holds up under real use.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-crimson" href="#flagships">EXPLORE WORK <span class="arr-down" aria-hidden="true">↓</span></a>
+            <a class="btn btn-glass" href="#contact">LET'S TALK <span class="arr-ne" aria-hidden="true">↗</span></a>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="hero-stat-box">
+              <div class="stat-val">06</div>
+              <div class="stat-lbl">Projects shipped</div>
+            </div>
+            <div class="hero-stat-box">
+              <div class="stat-val">02</div>
+              <div class="stat-lbl">IBM internships</div>
+            </div>
+            <div class="hero-stat-box">
+              <div class="stat-val">04</div>
+              <div class="stat-lbl">Certifications</div>
+            </div>
+          </div>
+
+          <a class="hero-scroll" href="#about">SCROLL TO EXPLORE <span class="arr-down" aria-hidden="true">↓</span></a>
+        </div>
+
+        <!-- Center: portrait -->
+        <div class="hero-center-col">
+          <div class="hero-cutout-wrap">
+            <div class="hero-portrait-panel" aria-hidden="true"></div>
+            <img class="hero-cutout-img" src="./bharath.webp" alt="Portrait of Y Bharath Kumar" width="560" height="734" />
+            <div class="cutout-status-badge">
+              <span class="status-pulse-red" aria-hidden="true">●</span> OPEN TO WORK
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: HUD stack -->
+        <div class="hero-flank right-flank">
+          <div class="hud-stack">
+            <article class="hud-card">
+              <div class="hud-card-header">
+                <span class="hud-idx">01</span>
+                <span class="hud-label">FEATURED</span>
+                <span class="hud-tag">AI</span>
+                <span class="hud-arrow" aria-hidden="true">↗</span>
+              </div>
+              <h2 class="hud-card-title">Lumora RAG</h2>
+              <p class="hud-card-desc">Grounded document intelligence with evidence behind every answer.</p>
+              <div class="hud-tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">ChromaDB</span>
+              </div>
+            </article>
+
+            <article class="hud-card">
+              <div class="hud-card-header">
+                <span class="hud-idx">02</span>
+                <span class="hud-label">LOCAL FIRST</span>
+                <span class="hud-tag">DESKTOP</span>
+                <span class="hud-arrow" aria-hidden="true">↗</span>
+              </div>
+              <h2 class="hud-card-title">BRO Live AI</h2>
+              <p class="hud-card-desc">Voice-driven desktop assistant with an explicit approval boundary.</p>
+              <div class="hud-tech-tags">
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Electron</span>
+              </div>
+            </article>
+
+            <article class="hud-card">
+              <div class="hud-card-header">
+                <span class="hud-idx">03</span>
+                <span class="hud-label">LIVE WEB</span>
+                <span class="hud-tag">OPTIMIZE</span>
+                <span class="hud-arrow" aria-hidden="true">↗</span>
+              </div>
+              <h2 class="hud-card-title">optisolver.ai</h2>
+              <p class="hud-card-desc">Plain-English planning problems turned into optimal decisions.</p>
+              <div class="hud-tech-tags">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">HiGHS</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill marquee -->
+      <div class="hero-marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span>JAVA</span><i>◆</i><span class="outline">PYTHON</span><i>◆</i><span>REACT</span><i>◆</i><span class="outline">NODE.JS</span><i>◆</i><span>FASTAPI</span><i>◆</i><span class="outline">RAG</span><i>◆</i><span>ELECTRON</span><i>◆</i><span class="outline">AZURE</span><i>◆</i><span>MYSQL</span><i>◆</i><span class="outline">CHROMADB</span><i>◆</i><span>PROMPT ENGINEERING</span><i>◆</i><span class="outline">GIT</span><i>◆</i>
+          </div>
+          <div class="marquee-group">
+            <span>JAVA</span><i>◆</i><span class="outline">PYTHON</span><i>◆</i><span>REACT</span><i>◆</i><span class="outline">NODE.JS</span><i>◆</i><span>FASTAPI</span><i>◆</i><span class="outline">RAG</span><i>◆</i><span>ELECTRON</span><i>◆</i><span class="outline">AZURE</span><i>◆</i><span>MYSQL</span><i>◆</i><span class="outline">CHROMADB</span><i>◆</i><span>PROMPT ENGINEERING</span><i>◆</i><span class="outline">GIT</span><i>◆</i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT
+    ============================================================ -->
+    <section id="about" class="section">
+      <span class="section-ghost" aria-hidden="true">01</span>
+      <div class="section-container">
+        <header class="section-header reveal">
+          <div class="section-tag"><span></span>ENGINEER PROFILE<i class="tag-arrow" aria-hidden="true">→</i></div>
+          <h2 class="section-title">Trained in code.<br /><em>Forged in shipping.</em></h2>
+          <p class="section-desc">
+            Information Science engineer from Bangalore, building across Java, Python,
+            React and applied AI — with an obsession for the details users can feel.
+          </p>
+        </header>
+
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>
+              I'm <strong>Y Bharath Kumar</strong>, an Information Science engineer from Bangalore
+              who likes the part of software where an idea becomes something people can actually
+              use — a grounded AI workspace, a desktop assistant, a solver that answers a real
+              planning question.
+            </p>
+            <p>
+              My IBM internships shaped two habits I keep: think about security before shipping,
+              and check that data is trustworthy before trusting the conclusion. I build in Java,
+              Python and React, with a growing focus on retrieval, evaluation and AI-assisted
+              products that stay honest.
+            </p>
+            <blockquote class="quote-box">
+              “A good interface earns attention. Verified answers, clean data and honest
+              results keep it.”
+            </blockquote>
+          </div>
+
+          <div class="principles-list reveal">
+            <article class="principle-item">
+              <span class="principle-num">01</span>
+              <div>
+                <h3 class="principle-title">Evidence over eloquence</h3>
+                <p class="principle-desc">If an answer can't show its sources, it isn't finished. Citations and self-checks are part of the product, not an afterthought.</p>
+              </div>
+            </article>
+            <article class="principle-item">
+              <span class="principle-num">02</span>
+              <div>
+                <h3 class="principle-title">Local-first by default</h3>
+                <p class="principle-desc">I prefer systems that keep working without a vendor, a login, or a connection — and that I can inspect end to end.</p>
+              </div>
+            </article>
+            <article class="principle-item">
+              <span class="principle-num">03</span>
+              <div>
+                <h3 class="principle-title">Build, measure, refine</h3>
+                <p class="principle-desc">Ship the smallest honest version, watch where it breaks, then remove the weak parts. Polish is a loop, not a phase.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="education-strip reveal">
+          <div class="edu-item">
+            <span class="edu-year">2021 — 2025</span>
+            <h3>New Horizon College of Engineering</h3>
+            <p>B.E., Information Science and Engineering · Bangalore</p>
+            <span class="edu-score">CGPA 8.24</span>
+          </div>
+          <div class="edu-item">
+            <span class="edu-year">2019 — 2021</span>
+            <h3>Sri Gayatri Junior College</h3>
+            <p>Intermediate · Class 12 · Vijayawada</p>
+            <span class="edu-score">CGPA 9.62</span>
+          </div>
+          <div class="edu-item">
+            <span class="edu-year">2019</span>
+            <h3>Saraswathi High School</h3>
+            <p>Secondary · Class 10 · Uppugundur</p>
+            <span class="edu-score">CGPA 9.5</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FLAGSHIPS
+    ============================================================ -->
+    <section id="flagships" class="section section-alt">
+      <span class="section-ghost" aria-hidden="true">02</span>
+      <div class="section-container">
+        <header class="section-header reveal">
+          <div class="section-tag"><span></span>ARCHITECTURAL SHOWCASE<i class="tag-arrow" aria-hidden="true">→</i></div>
+          <h2 class="section-title">Flagship <em>builds.</em></h2>
+          <p class="section-desc">
+            Products built end to end: the interface, the API, the data layer, and the
+            verification that keeps the output trustworthy.
+          </p>
+        </header>
+
+        <div class="flagship-container">
+          <!-- Main flagship -->
+          <article class="flagship-card highlighted-card reveal">
+            <div class="card-glow-red" aria-hidden="true"></div>
+
+            <div class="flagship-header">
+              <span class="flagship-badge"><span aria-hidden="true">●</span> FLAGSHIP BUILD</span>
+              <span class="flagship-meta">React · FastAPI · ChromaDB · Ollama</span>
+            </div>
+
+            <h3 class="flagship-title">Lumora — Grounded RAG Workspace</h3>
+            <p class="flagship-desc">
+              A local-first document-intelligence workspace. Upload your files, ask a question,
+              and inspect the exact evidence behind the answer. Built to make retrieval feel
+              less like a magic trick and more like a tool you can audit.
+            </p>
+
+            <div class="flagship-metrics-row">
+              <div class="metric-pill"><div class="metric-num">4-STAGE</div><div class="metric-desc">Grounded pipeline</div></div>
+              <div class="metric-pill"><div class="metric-num">100%</div><div class="metric-desc">Local-first by default</div></div>
+              <div class="metric-pill"><div class="metric-num">CITED</div><div class="metric-desc">Evidence per answer</div></div>
+              <div class="metric-pill"><div class="metric-num">HYBRID</div><div class="metric-desc">Retrieval + verification</div></div>
+            </div>
+
+            <div class="architecture-explorer">
+              <div class="explorer-header">
+                <span class="explorer-title">RETRIEVAL PIPELINE</span>
+                <span class="explorer-sub">Click a stage to inspect</span>
+              </div>
+
+              <div class="stage-tabs" role="tablist" aria-label="Retrieval pipeline stages">
+                <button class="stage-tab active" role="tab" aria-selected="true" aria-controls="stage-pane" data-stage="1">
+                  <span>01</span> INGEST
+                </button>
+                <button class="stage-tab" role="tab" aria-selected="false" aria-controls="stage-pane" data-stage="2">
+                  <span>02</span> RETRIEVE
+                </button>
+                <button class="stage-tab" role="tab" aria-selected="false" aria-controls="stage-pane" data-stage="3">
+                  <span>03</span> VERIFY
+                </button>
+                <button class="stage-tab" role="tab" aria-selected="false" aria-controls="stage-pane" data-stage="4">
+                  <span>04</span> ANSWER
+                </button>
+              </div>
+
+              <div class="stage-pane" id="stage-pane" role="tabpanel" aria-live="polite">
+                <div class="stage-inspect-badge" id="stage-badge">STAGE 01 // INTAKE</div>
+                <h4 class="stage-inspect-title" id="stage-title">Structure-aware ingestion</h4>
+                <p class="stage-inspect-desc" id="stage-desc">
+                  Multi-format documents are parsed with their headings, tables and context intact.
+                  Chunks are shaped around meaning instead of arbitrary character counts, so the
+                  retriever never sees a fragment without its neighbourhood.
+                </p>
+                <div class="tech-tags-group" id="stage-tags">
+                  <span class="tech-tag">PDF</span>
+                  <span class="tech-tag">DOCX</span>
+                  <span class="tech-tag">Markdown</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flagship-footer">
+              <div class="tech-tags-group">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">ChromaDB</span>
+                <span class="tech-tag">Ollama</span>
+              </div>
+              <a class="text-link" href="https://bharath609.github.io/lumora-rag-chatbot/" target="_blank" rel="noopener noreferrer">OPEN LIVE DEMO <span class="arr-ne" aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <!-- Sub-flagships -->
+          <div class="flagship-subgrid">
+            <article class="subgrid-card reveal">
+              <div class="subgrid-top">
+                <span class="subgrid-badge">LOCAL FIRST</span>
+                <span class="subgrid-id">#SYS-02</span>
+              </div>
+              <h3 class="subgrid-title">BRO — Live AI Assistant</h3>
+              <p class="subgrid-desc">
+                A local-first desktop assistant that turns explicit chat and voice commands into
+                safe, useful actions across projects, websites and Windows.
+              </p>
+              <ul class="spec-list">
+                <li>Deterministic intent routing with named project commands</li>
+                <li>Approval boundary before any profile or action runs</li>
+                <li>Browser voice I/O, Electron overlay, one-shot voice workflow</li>
+              </ul>
+              <div class="subgrid-footer">
+                <div class="tech-tags-group">
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">Electron</span>
+                  <span class="tech-tag">Voice AI</span>
+                </div>
+                <a class="bento-link" href="https://github.com/bharath609" target="_blank" rel="noopener noreferrer" aria-label="BRO Live AI on GitHub"><span class="arr-ne" aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+
+            <article class="subgrid-card reveal">
+              <div class="subgrid-top">
+                <span class="subgrid-badge">LIVE PRODUCT</span>
+                <span class="subgrid-id">#SYS-03</span>
+              </div>
+              <h3 class="subgrid-title">optisolver.ai</h3>
+              <p class="subgrid-desc">
+                An AI operations-research tool that turns plain-English planning problems into
+                mathematically optimal decisions in seconds.
+              </p>
+              <ul class="spec-list">
+                <li>Natural-language input for production and transport planning</li>
+                <li>HiGHS solver for optimal quantities, costs and utilization</li>
+                <li>No-signup experience built for founders and small teams</li>
+              </ul>
+              <div class="subgrid-footer">
+                <div class="tech-tags-group">
+                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">FastAPI</span>
+                  <span class="tech-tag">HiGHS</span>
+                </div>
+                <a class="bento-link" href="https://optiforge-ai.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="optisolver.ai live site"><span class="arr-ne" aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SYSTEMS MATRIX
+    ============================================================ -->
+    <section id="matrix" class="section">
+      <span class="section-ghost" aria-hidden="true">03</span>
+      <div class="section-container">
+        <header class="section-header reveal">
+          <div class="section-tag"><span></span>ENGINEERING INDEX<i class="tag-arrow" aria-hidden="true">→</i></div>
+          <h2 class="section-title">The systems <em>matrix.</em></h2>
+          <p class="section-desc">
+            A working index of interfaces, APIs, desktop tools and experiments. Filter by
+            discipline or read them all.
+          </p>
+        </header>
+
+        <div class="bento-controls reveal" role="group" aria-label="Filter projects">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">All Work</button>
+          <button class="filter-btn" data-filter="ai" aria-pressed="false">AI &amp; RAG</button>
+          <button class="filter-btn" data-filter="web" aria-pressed="false">Web &amp; Product</button>
+          <button class="filter-btn" data-filter="java" aria-pressed="false">Java &amp; Desktop</button>
+        </div>
+
+        <div class="bento-grid" id="bento-grid">
+          <article class="bento-card grad-card reveal" data-cat="ai">
+            <div class="bento-top">
+              <span class="category-chip">AI &amp; RAG</span>
+              <span class="bento-id">#SYS-01</span>
+            </div>
+            <h3 class="bento-title">Lumora — Grounded RAG Workspace</h3>
+            <p class="bento-desc">
+              Local-first document intelligence with structure-aware chunks, a relevance gate,
+              cited answers and claim-level verification. The answer shows its work.
+            </p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">Python</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">ChromaDB</span>
+              </div>
+              <a class="bento-link" href="https://bharath609.github.io/lumora-rag-chatbot/" target="_blank" rel="noopener noreferrer" aria-label="Lumora live demo"><span class="arr-ne" aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="bento-card reveal" data-cat="ai">
+            <div class="bento-top">
+              <span class="category-chip">AI &amp; RAG</span>
+              <span class="bento-id">#SYS-02</span>
+            </div>
+            <h3 class="bento-title">BRO Live AI Assistant</h3>
+            <p class="bento-desc">A voice-first desktop assistant constrained by allowlists, approvals and bounded command output.</p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">Node.js</span><span class="tag">Electron</span><span class="tag">Voice AI</span>
+              </div>
+              <a class="bento-link" href="https://github.com/bharath609" target="_blank" rel="noopener noreferrer" aria-label="BRO on GitHub"><span class="arr-ne" aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="bento-card reveal" data-cat="web">
+            <div class="bento-top">
+              <span class="category-chip">WEB &amp; PRODUCT</span>
+              <span class="bento-id">#SYS-03</span>
+            </div>
+            <h3 class="bento-title">optisolver.ai</h3>
+            <p class="bento-desc">Plain-English operations research: describe the problem, get optimal quantities and reasoning.</p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">HiGHS</span>
+              </div>
+              <a class="bento-link" href="https://optiforge-ai.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="optisolver.ai live site"><span class="arr-ne" aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="bento-card reveal" data-cat="web">
+            <div class="bento-top">
+              <span class="category-chip">WEB &amp; PRODUCT</span>
+              <span class="bento-id">#SYS-04</span>
+            </div>
+            <h3 class="bento-title">This Portfolio</h3>
+            <p class="bento-desc">A hand-built React + Vite site with a custom design system, no templates and no component-library bloat.</p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">React</span><span class="tag">Vite</span><span class="tag">CSS</span>
+              </div>
+              <a class="bento-link" href="https://github.com/bharath609" target="_blank" rel="noopener noreferrer" aria-label="Portfolio source on GitHub"><span class="arr-ne" aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="bento-card reveal" data-cat="java">
+            <div class="bento-top">
+              <span class="category-chip">JAVA &amp; DESKTOP</span>
+              <span class="bento-id">#SYS-05</span>
+            </div>
+            <h3 class="bento-title">Live Score Board</h3>
+            <p class="bento-desc">A Java Swing scoreboard with real-time score updates, event handling and a clean OOP structure.</p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">Java</span><span class="tag">Swing</span><span class="tag">OOP</span>
+              </div>
+              <a class="bento-link" href="https://github.com/bharath609" target="_blank" rel="noopener noreferrer" aria-label="Java projects on GitHub"><span class="arr-ne" aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="bento-card reveal" data-cat="java">
+            <div class="bento-top">
+              <span class="category-chip">JAVA &amp; DESKTOP</span>
+              <span class="bento-id">#SYS-06</span>
+            </div>
+            <h3 class="bento-title">Grocery Billing System</h3>
+            <p class="bento-desc">Item selection, quantity logic, tax calculation and timestamped receipts in one small Python app.</p>
+            <div class="bento-footer">
+              <div class="bento-tags">
+                <span class="tag">Python</span><span class="tag">Billing</span><span class="tag">Receipts</span>
+              </div>
+              <a class="bento-link" href="https://github.com/bharath609" target="_blank" rel="noopener noreferrer" aria-label="Python projects on GitHub"><span class="arr-ne" aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="bento-card availability-card reveal" data-cat="all">
+            <div class="bento-top">
+              <span class="category-chip">NEXT</span>
+              <span class="bento-id">#YOU</span>
+            </div>
+            <h3 class="bento-title">Your team's next build.</h3>
+            <p class="bento-desc">
+              I'm looking for my first full-time software role — Java, Python, full-stack or
+              applied AI. Bring the problem; I'll bring the evidence.
+            </p>
+            <div class="bento-footer">
+              <a class="text-link" href="#contact">START A CONVERSATION <span class="arr-right" aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STACK
+    ============================================================ -->
+    <section id="stack" class="section section-alt">
+      <span class="section-ghost" aria-hidden="true">04</span>
+      <div class="section-container">
+        <header class="section-header reveal">
+          <div class="section-tag"><span></span>TECHNICAL STACK<i class="tag-arrow" aria-hidden="true">→</i></div>
+          <h2 class="section-title">Tools I <em>think in.</em></h2>
+          <p class="section-desc">
+            Not a checklist — the layers I reach for when an idea has to become a working,
+            inspectable system.
+          </p>
+        </header>
+
+        <div class="stack-grid">
+          <div class="stack-group reveal">
+            <h3 class="stack-group-title"><span>01</span> Languages &amp; runtimes</h3>
+            <div class="stack-pills">
+              <span class="tech-pill">Java</span><span class="tech-pill">Python</span><span class="tech-pill">JavaScript</span><span class="tech-pill">Node.js</span>
+            </div>
+          </div>
+
+          <div class="stack-group reveal">
+            <h3 class="stack-group-title"><span>02</span> Frontend &amp; APIs</h3>
+            <div class="stack-pills">
+              <span class="tech-pill">React.js</span><span class="tech-pill">Vite</span><span class="tech-pill">HTML5</span><span class="tech-pill">CSS3</span><span class="tech-pill">FastAPI</span><span class="tech-pill">Spring Boot</span>
+            </div>
+          </div>
+
+          <div class="stack-group reveal">
+            <h3 class="stack-group-title"><span>03</span> AI &amp; retrieval</h3>
+            <div class="stack-pills">
+              <span class="tech-pill">RAG</span><span class="tech-pill">ChromaDB</span><span class="tech-pill">Ollama</span><span class="tech-pill">Embeddings</span><span class="tech-pill">Prompt engineering</span><span class="tech-pill">Citation grounding</span><span class="tech-pill">Claim verification</span><span class="tech-pill">Relevance gating</span>
+            </div>
+          </div>
+
+          <div class="stack-group reveal">
+            <h3 class="stack-group-title"><span>04</span> Cloud &amp; data</h3>
+            <div class="stack-pills">
+              <span class="tech-pill">Azure Cloud</span><span class="tech-pill">VMware</span><span class="tech-pill">MySQL</span>
+            </div>
+          </div>
+
+          <div class="stack-group reveal">
+            <h3 class="stack-group-title"><span>05</span> Desktop &amp; tooling</h3>
+            <div class="stack-pills">
+              <span class="tech-pill">Electron</span><span class="tech-pill">Web Speech API</span><span class="tech-pill">Windows automation</span><span class="tech-pill">GitHub</span><span class="tech-pill">VS Code</span><span class="tech-pill">pytest</span>
+            </div>
+          </div>
+
+          <div class="stack-group soft-group reveal">
+            <h3 class="stack-group-title"><span>06</span> Working style</h3>
+            <div class="stack-pills">
+              <span class="tech-pill">Adaptability</span><span class="tech-pill">Time management</span><span class="tech-pill">Communication</span><span class="tech-pill">Teamwork</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-strip reveal">
+          <span class="cert-strip-label">CERTIFICATIONS</span>
+          <div class="cert-strip-items">
+            <span>Front End Development <b>Udemy</b></span>
+            <span>Data Analytics <b>Great Learning</b></span>
+            <span>Full Stack Java <b>CVCORP</b></span>
+            <span>Prompt Engineering <b>Columbia+</b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT
+    ============================================================ -->
+    <section id="contact" class="section contact-section">
+      <div class="section-container">
+        <div class="contact-card reveal">
+          <div class="contact-glow-red" aria-hidden="true"></div>
+          <div class="section-tag contact-tag"><span></span>DIRECT CONNECT<i class="tag-arrow" aria-hidden="true">→</i></div>
+          <h2 class="contact-title">Let's build something<br /><em>that holds up.</em></h2>
+          <p class="contact-subtitle">
+            I'm looking for my first full-time software role. If your team works with Java,
+            Python, full-stack web or applied AI, I'd love to hear from you.
+          </p>
+
+          <div class="email-action-box">
+            <a class="email-address" href="mailto:ybharathkumar2006@gmail.com">ybharathkumar2006@gmail.com <span class="arr-ne" aria-hidden="true">↗</span></a>
+            <button class="copy-btn" id="copy-email" data-email="ybharathkumar2006@gmail.com">COPY</button>
+          </div>
+
+          <div class="social-links-row">
+            <a class="social-pill" href="https://github.com/bharath609" target="_blank" rel="noopener noreferrer">GitHub <span class="arr-ne" aria-hidden="true">↗</span></a>
+            <a class="social-pill" href="https://www.linkedin.com/in/y-bharath-kumar-5990b4263/" target="_blank" rel="noopener noreferrer">LinkedIn <span class="arr-ne" aria-hidden="true">↗</span></a>
+            <a class="social-pill" href="https://wa.me/918519828505?text=Hello%20Bharath" target="_blank" rel="noopener noreferrer">WhatsApp <span class="arr-ne" aria-hidden="true">↗</span></a>
+            <a class="social-pill" href="../resume.pdf" target="_blank" rel="noopener noreferrer">Resume <span class="arr-ne" aria-hidden="true">↗</span></a>
+          </div>
+
+          <div class="contact-status">
+            <span class="status-dot"></span> Available for full-time roles · Bangalore / remote
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-monogram">YB</span>
+        <span>Y Bharath Kumar</span>
+      </div>
+      <p class="footer-meta">
+        Noir &amp; Crimson · Design prototype 01 · © 2026
+      </p>
+      <button class="footer-replay" id="swarm-replay" type="button">REPLAY INTRO <span aria-hidden="true">↻</span></button>
+      <a class="footer-top" href="#hero">BACK TO TOP <span class="arr-up" aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+
+  <div class="toast-notification" id="toast" role="status" aria-live="polite">
+    <span class="toast-icon" aria-hidden="true">✓</span>
+    <span id="toast-text">Email copied to clipboard</span>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

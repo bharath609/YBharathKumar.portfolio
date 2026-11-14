@@ -12,6 +12,15 @@ Your photo is `public/assets/bharath.webp`.
     npm run dev        # http://localhost:5173
     npm run build      # production build into dist/
 
+## Design prototype (noir & crimson)
+A standalone design prototype lives in `public/demo/` (HTML/CSS/JS, not wired into the React app yet).
+Preview it at **http://localhost:5173/YBharathKumar.portfolio/demo/index.html** while `npm run dev` is running,
+or open `public/demo/index.html` directly in a browser. Once approved, the next step is porting it into `src/`.
+
+The demo opens with the arrow-agent swarm intro (18 colored cursors repainting the screen, 12 on mobile).
+Press `Esc` or **ENTER** to skip it; replay it from **REPLAY INTRO** in the footer. Runs once per browser
+session by default — add `?swarm=1` to force it, `?swarm=off` to bypass it, or `?swarm=once` to keep the session behaviour.
+
 ## Publish (one time)
 1. On GitHub create a **public** repository named exactly `bharath609.github.io` (no README, no .gitignore).
 2. In this folder run:
