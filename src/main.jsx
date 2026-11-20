@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 import photo from './assets/bharath.webp';
+import resumePreview from './assets/resume-preview.webp';
 
 /* ---------- CONTENT: edit this block to change the site ---------- */
 const EMAIL = 'ybharathkumar2006@gmail.com';
@@ -143,6 +144,7 @@ function App() {
           <button onClick={() => nav('#intern')}>Internships</button>
           <button onClick={() => nav('#work')}>Projects</button>
           <button onClick={() => nav('#skills')}>Skills</button>
+          <button onClick={() => nav('#resume')}>Resume</button>
           <button className="cta" onClick={() => nav('#contact')}>Let's talk ↗</button>
         </nav>
         <button className="burger" aria-label="Menu" onClick={() => setMenu(!menu)}><span /><span /></button>
@@ -250,6 +252,30 @@ function App() {
           <div className="lab">Certifications</div>
           <div className="mq"><div className="mt">{[...marquee, ...marquee].map((w, i) => <span key={i}>{w}</span>)}</div></div>
           <div className="certs">{certs.map(([a, b]) => <div className="cert" key={b}><span>{a}</span><b>{b}</b></div>)}</div>
+        </section>
+
+        <section className="alt" id="resume">
+          <div className="lab">Resume</div>
+          <div className="resume">
+            <div>
+              <h2>Everything, <em>on one page.</em></h2>
+              <p>The latest version, kept in sync with the work on this site: my AI and full-stack projects, both IBM internships, education and certifications.</p>
+              <ul className="inside">
+                <li>B.E. Information Science, CGPA 8.24</li>
+                <li>Two IBM internships: security and AI data quality</li>
+                <li>AI: RAG, LLM integration, prompt engineering</li>
+                <li>Java, Python, React, FastAPI, Node.js, Electron</li>
+              </ul>
+              <div className="row">
+                <Ext className="btn solid" href={RESUME}>Open resume ↗</Ext>
+                <a className="btn" href={RESUME} download="Y-Bharath-Kumar-Resume.pdf">Download PDF ↓</a>
+              </div>
+            </div>
+            <a className="paper" href={RESUME} target="_blank" rel="noopener noreferrer" aria-label="Open the updated resume PDF">
+              <img src={resumePreview} alt="Preview of Y Bharath Kumar's resume" width="1428" height="2021" loading="lazy" />
+              <span>Open the updated PDF ↗</span>
+            </a>
+          </div>
         </section>
 
         <section className="contact" id="contact">
